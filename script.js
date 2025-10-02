@@ -9,6 +9,8 @@ const transactionList = document.getElementById("transaction-list");
 const incomeEl = document.getElementById("income");
 const expenseEl = document.getElementById("expense");
 const balanceEl = document.getElementById("balance");
+// get chart context
+const ctx = document.getElementById("financeChart").getContext("2d");
 
 // Load transactions from localStorage or empty array
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
@@ -87,7 +89,31 @@ function updateSummary() {
   incomeEl.textContent = income;
   expenseEl.textContent = expense;
   balanceEl.textContent = balance;
+
+  // Update Chart
+  financeChart.data.datasets[0].data = [income, expense];
+  financeChart.update();
 }
+
+let financeChart = new Chart(ctx, {
+  type: "pie",
+  data: {
+    labels: ["Income", "Expense"],
+    datasets: [{
+      label: "Finance Overview",
+      data: [0, 0], // will update dynamically
+      backgroundColor: ["#4CAF50", "#F44336"], // green income, red expense
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom"
+      }
+    }
+  }
+});
 
 // Update localStorage
 function updateLocalStorage() {
