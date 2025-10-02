@@ -38,6 +38,25 @@ addBtn.addEventListener("click", () => {
   const li = document.createElement("li");
   li.textContent = `${type.toUpperCase()}: ${description} - ₹${amount}`;
   li.classList.add(type);
+
+  // Create Delete button
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.style.marginLeft = "10px";
+  deleteBtn.style.marginLeft = "10px";
+  deleteBtn.style.cursor = "pointer";
+
+  // Attach delete functionality
+  deleteBtn.addEventListener("click", () => {
+    // Remove transaction from array
+    transactions = transactions.filter(t => t !== transaction);
+
+    // Remove from DOM
+    transactionList.removeChild(li);
+    updateSummary();
+  });
+
+  li.appendChild(deleteBtn);
   transactionList.appendChild(li);
 
   // Update summary
