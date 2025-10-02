@@ -10,36 +10,18 @@ const incomeEl = document.getElementById("income");
 const expenseEl = document.getElementById("expense");
 const balanceEl = document.getElementById("balance");
 
-// Transactions array
-let transactions = [];
+// Load transactions from localStorage or empty array
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-// Step 2: Button click event
-addBtn.addEventListener("click", () => {
-  const description = descriptionInput.value;
-  const amount = Number(amountInput.value);
-  const type = typeSelect.value;
+// Display transactions
+function displayTransactions() {
+  transactionList.innerHTML = "", // clear existing list
+  transactions.forEach(transaction => {
+    const li = document.createElement("li");
+    li.textContent = `${transaction.type.toUpperCase()}: ${transaction.description} - ₹${transaction.amount}`;
+    li.classList.add(transaction.type);
 
-  if (description === "" || amount === 0) {
-    alert("Please enter description and amount!");
-    return;
-  }
-
-  // Create transaction object
-  const transaction = {
-    description: description,
-    amount: amount,
-    type: type
-  };
-
-  // Add to array
-  transactions.push(transaction);
-
-  // Display transaction in list
-  const li = document.createElement("li");
-  li.textContent = `${type.toUpperCase()}: ${description} - ₹${amount}`;
-  li.classList.add(type);
-
-  // Create Delete button
+      // Create Delete button
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
   deleteBtn.style.marginLeft = "10px";
@@ -58,8 +40,27 @@ addBtn.addEventListener("click", () => {
 
   li.appendChild(deleteBtn);
   transactionList.appendChild(li);
+  });
+}
 
-  // Update summary
+// Button click event
+addBtn.addEventListener("click", () => {
+  const description = descriptionInput.value;
+  const amount = Number(amountInput.value);
+  const type = typeSelect.value;
+
+  if (description === "" || amount === 0) {
+    alert("Please enter description and amount!");
+    return;
+  }
+
+  // Create transaction object
+  const transaction = { description, amount, type };
+  // Add to array
+  transactions.push(transaction);
+
+  updateLocalStorage();
+  displayTransactions();
   updateSummary();
 
   // Clear inputs
@@ -67,7 +68,7 @@ addBtn.addEventListener("click", () => {
   amountInput.value = "";
 });
 
-// Step 3: Function to calculate totals
+// update summary
 function updateSummary() {
   let income = 0;
   let expense = 0;
@@ -87,3 +88,12 @@ function updateSummary() {
   expenseEl.textContent = expense;
   balanceEl.textContent = balance;
 }
+
+// Update localStorage
+function updateLocalStorage() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
+// Initial display
+displayTransactions();
+updateSummary();
