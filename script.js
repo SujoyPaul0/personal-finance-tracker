@@ -20,7 +20,7 @@ function displayTransactions() {
   transactionList.innerHTML = "", // clear existing list
   transactions.forEach(transaction => {
     const li = document.createElement("li");
-    li.textContent = `${transaction.type.toUpperCase()}: ${transaction.description} - ₹${transaction.amount}`;
+    li.textContent = `${transaction.type.toUpperCase()}: ${transaction.description} ➡️ ₹${transaction.amount}`;
     li.classList.add(transaction.type);
 
       // Create Delete button

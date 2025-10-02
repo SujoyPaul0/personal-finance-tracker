@@ -8,39 +8,47 @@
 </head>
 
 <body>
-  <h1>Personal Finance Tracker ₹</h1>
+  <div class="container">
+    <h1>Personal 💰 Tracker</h1>
+    
+    <!--Form Section-->
+    <div class="section" id="transaction-form">
+      <input type="text" id="description" placeholder="Enter description (e.g., Salary, Food)">
+      <input type ="number" id="amount" placeholder="Enter amount">
+      <div class="container">
+        <select id="type">
+          <div class="container">
+            <option class="option" value="income">Income</option>
+            <option class="option" value="expense">Expense</option>
+          </div>
+        </select>
+        <button id="add-btn">Add Transaction</button>
+      </div>
+    </div>
 
-  <!--Form Section-->
-  <div id="transaction-form">
-    <input type="text" id="description" placeholder="Enter description (e.g., Salary, Food)">
-    <input type ="number" id="amount" placeholder="Enter amount">
-    <select id="type">
-      <option value="income">Income</option>
-      <option value="expense">Expense</option>
-    </select>
-    <button id="add-btn">Add Transaction</button>
-  </div>
+    <!--Summary Section-->
+    <div class="section" id="summary">
+      <h2>Summary</h2>
+      <p>Income: <span id="income">0</span></p>
+      <p>Expense: <span id="expense">0</span></p>
+      <p>Balance: <span id="balance">0</span></p>
+    </div>
 
-  <!--Summary Section-->
-  <div id="summary">
-    <h2>Summary</h2>
-    <p>Income: <span id="income">0</span></p>
-    <p>Expense: <span id="expense">0</span></p>
-    <p>Balance: <span id="balance">0</span></p>
-  </div>
+    <!-- Transaction List -->
+    <div class="sectiion" id="transactions">
+      <h2>Transaction History</h2>
+      <ul id="transaction-list">
+        <!-- Transaction will appear here -->
+      </ul>
+    </div>
 
-  <!-- Transaction List -->
-  <div id="transactions">
-    <h2>Transaction History</h2>
-    <ul id="transaction-list">
-      <!-- Transaction will appear here -->
-    </ul>
-  </div>
+    <!-- Visualization Section -->
+    <div>
+      <h2>Visualization</h2>
+      <canvas id="financeChart" width="400" heigh="400"></canvas>
+    </div>
+</div>
 
-  <h2>Visualization</h2>
-  <canvas id="financeChart" width="400" heigh="400"></canvas>
-
-  // visualisation chart
   <script src ="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src ="script.js"></script>
 </body>

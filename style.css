@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #dda15e, #bc6c25);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.section {
+    background: #fefae0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    flex: 1 1 100px;  
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+}
+
+button {
+    background: linear-gradient(to right, #606c38, #283618);
+    border: none;
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background: linear-gradient(to right, #00f2fe, #4facfe);
+}
+
+canvas {
+    max-width: 250px;
+    max-height: 250px;
+    margin: auto;
+    display: block;
+}
+
+/* 📱 Tablet and below */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;   /* stack vertically */
+        align-items: center;      /* center sections */
+    }
+
+    .section {
+        max-width: 90%;           /* take more width */
+    }
+}
+
+/* 📱 Mobile and small phones */
+@media (max-width: 480px) {
+    input, select, button {
+        width: 100%;              /* full width controls */
+        margin: 5px 0;            /* spacing between */
+    }
+
+    canvas {
+        max-width: 200px;         /* shrink chart a bit */
+        max-height: 200px;
+    }
+}
+
